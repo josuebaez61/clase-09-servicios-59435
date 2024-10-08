@@ -19,5 +19,35 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productsService.getProducts();
+    // this.subscribeToCounter();
+    this.getPromise();
+  }
+
+  getPromise(): void {
+    this.productsService
+      .getPromise()
+      // Equivale al next
+      .then((value) => console.log('PROMESA VALOR:', value))
+      // Equivale al error
+      .catch((err) => alert(err))
+      // Equivale al complete
+      .finally(() => console.log('La promise se finalizo'));
+  }
+
+  subscribeToCounter(): void {
+    this.productsService.getCounter().subscribe({
+      // Next: es cuando el observable emite un nuevo valor
+      next: (val) => {
+        console.log('RECIBIMOS: ', val);
+      },
+      // Error: es cuando el observable emite un error
+      error: (error) => {
+        // alert(error);
+      },
+      // Complete: es cuando el observable deja de emitir valores
+      complete: () => {
+        console.log('Este observable se completo');
+      },
+    });
   }
 }

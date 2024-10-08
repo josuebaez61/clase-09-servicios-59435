@@ -3,9 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsService } from './core/services/products.service';
-import { ProductsMockService } from './core/mocks/products-mock.service';
-import { MY_URL } from './core/injection-tokens';
+
 import { MY_URL_PROVIDER } from './core/providers';
 
 @NgModule({

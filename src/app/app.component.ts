@@ -10,6 +10,7 @@ import { MY_URL } from './core/injection-tokens';
 export class AppComponent implements OnInit {
   title = 'clase-09-servicios';
   products: Product[] = [];
+  mostrarHome = true;
 
   constructor(
     // private _products: ProductsService
@@ -18,9 +19,17 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    // this.products = this.productsService.getProducts();
     // this.subscribeToCounter();
-    this.getPromise();
+    // this.getPromise();
+    // this.subscribeToGetNumber();
+  }
+
+  subscribeToGetNumber(): void {
+    this.productsService.getNumbers().subscribe({
+      next: (v) => console.log(v),
+      complete: () => console.log('El observable se completo!'),
+    });
   }
 
   getPromise(): void {

@@ -1,0 +1,18 @@
+@if (!isLoading) { @if (error) {
+<p>Ocurrio un error inesperado!</p>
+} @else {
+<h3>Venedores:</h3>
+<ul>
+  <li *ngFor="let seller of sellers">{{ seller }}</li>
+</ul>
+
+<hr />
+
+<h3>Productos:</h3>
+<ul>
+  <li *ngFor="let product of products">{{ product }}</li>
+</ul>
+
+} } @else {
+<p>Esta cargando por favor espere...</p>
+}

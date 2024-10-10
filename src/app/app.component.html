@@ -1,7 +1,11 @@
-<h2>{{ url }}</h2>
+<button (click)="mostrarHome = !mostrarHome">Mostrar/Ocultar</button>
+
+<app-home *ngIf="mostrarHome" />
+
+<!-- <h2>{{ url }}</h2>
 
 <ul>
   <li *ngFor="let product of products">
     {{ product.name }}
   </li>
-</ul>
+</ul> -->

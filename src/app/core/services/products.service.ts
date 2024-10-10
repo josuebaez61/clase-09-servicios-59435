@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { delay, interval, Observable, of, throwError } from 'rxjs';
 
 export interface Product {
   id: number;
@@ -21,9 +21,35 @@ const MY_PRODUCTS_DB = [
 export class ProductsService {
   constructor() {}
 
-  getProducts(): Product[] {
-    return MY_PRODUCTS_DB;
+  getNumbers(): Observable<number> {
+    // return new Observable(subs => subs.next())
+    return of(1, 2, 3);
   }
+
+  getId(): Observable<number> {
+    return of(1);
+  }
+
+  getProducts(): Observable<string[]> {
+    return of(['PC Gamer', 'PS5', 'Monitor', 'Mouse']).pipe(delay(1000));
+  }
+
+  getSellers(): Observable<string[]> {
+    return of(['Jorge', 'Maria', 'Eugenio']).pipe(delay(2000));
+    // return throwError(() => 'Ocurrio un error');
+  }
+
+  getProductById(id: number): Observable<{ id: number; name: string }> {
+    return of({ id: 1, name: 'PC Gamer' });
+  }
+
+  getInterval(): Observable<number> {
+    return interval(1000);
+  }
+
+  // getProducts(): Product[] {
+  //   return MY_PRODUCTS_DB;
+  // }
 
   getCounter(): Observable<number> {
     return new Observable<number>((observer) => {

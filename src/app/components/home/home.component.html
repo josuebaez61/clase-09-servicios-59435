@@ -1,4 +1,20 @@
-@if (!isLoading) { @if (error) {
+<!-- <p>{{ value$ | async }}</p> -->
+
+<h1 *ngIf="showTitle">Soy un titulo</h1>
+
+<!-- <button
+  (click)="
+    alertService.showAlert({
+      title: 'Click',
+      text: 'Se hizo click',
+      icon: 'success'
+    })
+  "
+>
+  Click me!
+</button> -->
+
+<!-- @if (!isLoading) { @if (error) {
 <p>Ocurrio un error inesperado!</p>
 } @else {
 <h3>Venedores:</h3>
@@ -15,4 +31,4 @@
 
 } } @else {
 <p>Esta cargando por favor espere...</p>
-}
+} -->

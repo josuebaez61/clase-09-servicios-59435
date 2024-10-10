@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Product, ProductsService } from './core/services/products.service';
 import { MY_URL } from './core/injection-tokens';
+import { AlertService } from './core/services/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,20 @@ export class AppComponent implements OnInit {
   constructor(
     // private _products: ProductsService
     private productsService: ProductsService,
+    private alertService: AlertService,
     @Inject(MY_URL) public url: string
   ) {}
 
   ngOnInit(): void {
+    this.alertService.subscribeToAlerts();
     // this.products = this.productsService.getProducts();
     // this.subscribeToCounter();
     // this.getPromise();
     // this.subscribeToGetNumber();
+  }
+
+  sendShowTitle(): void {
+    this.alertService.showTitle();
   }
 
   subscribeToGetNumber(): void {

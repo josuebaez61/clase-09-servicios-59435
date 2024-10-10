@@ -6,11 +6,13 @@ import {
   first,
   forkJoin,
   map,
+  Observable,
   skip,
   Subscription,
   take,
   tap,
 } from 'rxjs';
+import { AlertService } from '../../core/services/alert.service';
 
 @Component({
   selector: 'app-home',
@@ -26,16 +28,35 @@ export class HomeComponent implements OnDestroy, OnInit {
   sellers: string[] = [];
   products: string[] = [];
 
-  constructor(private productsService: ProductsService) {
+  value$?: Observable<number>;
+
+  showTitle = false;
+
+  constructor(
+    private productsService: ProductsService,
+    public alertService: AlertService
+  ) {
     // this.subscribeToInterval();
+    this.value$ = this.productsService.getInterval();
   }
+
   ngOnInit(): void {
-    this.loadProductsAndSellers();
+    // this.subscribeToInterval();
+    // this.loadProductsAndSellers();
     // throw new Error('Method not implemented.');
+    this.subscribeToShowTitle();
+  }
+
+  subscribeToShowTitle(): void {
+    this.alertService.showTitle$.pipe(first()).subscribe({
+      next: (v) => {
+        this.showTitle = true;
+      },
+    });
   }
 
   ngOnDestroy(): void {
-    this.intervalSubscription?.unsubscribe();
+    // this.intervalSubscription?.unsubscribe();
   }
 
   loadProductsAndSellers(): void {
@@ -78,9 +99,9 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   subscribeToInterval(): void {
-    this.intervalSubscription = this.productsService.getInterval().subscribe({
-      next: (v) => console.log(v),
-      complete: () => console.log('Se finalizo!'),
-    });
+    // this.intervalSubscription = this.productsService.getInterval().subscribe({
+    //   next: (v) => (this.value = v),
+    //   complete: () => console.log('Se finalizo!'),
+    // });
   }
 }

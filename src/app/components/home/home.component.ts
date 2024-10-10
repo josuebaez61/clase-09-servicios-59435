@@ -32,12 +32,21 @@ export class HomeComponent implements OnDestroy, OnInit {
 
   showTitle = false;
 
+  myPromise = new Promise((res) =>
+    res('Hola mundo, soy el resultado de una promesa!')
+  );
+
+  products$: Observable<string[]>;
+
   constructor(
     private productsService: ProductsService,
     public alertService: AlertService
   ) {
     // this.subscribeToInterval();
-    this.value$ = this.productsService.getInterval();
+
+    this.products$ = this.productsService.getProducts();
+
+    this.value$ = this.productsService.getInterval().pipe(map((v) => v * 10));
   }
 
   ngOnInit(): void {

@@ -1,6 +1,22 @@
-<!-- <p>{{ value$ | async }}</p> -->
+<p>{{ value$ | async }}</p>
+
+<p>{{ myPromise | async }}</p>
 
 <h1 *ngIf="showTitle">Soy un titulo</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Productos</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let product of products$ | async">
+      <td>{{ product }}</td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- <button
   (click)="
